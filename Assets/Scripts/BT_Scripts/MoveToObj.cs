@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MoveToPos : Action
+public class MoveToObj : Action
 {
     private NavMeshAgent _navAgent;
     private Animator _animator;
 
-    public SharedVector3 _targetPos;
+    public SharedTransform _targetObj;
 
     public override void OnAwake()
     {
@@ -20,9 +20,9 @@ public class MoveToPos : Action
 
     public override void OnStart()
     {
-        if (Util.isInRange(transform.position, _targetPos.Value, 1f) == false)
+        if (Util.isInRange(transform.position, _targetObj.Value.position, 1f) == false)
         {
-            _navAgent.SetDestination(_targetPos.Value);
+            _navAgent.SetDestination(_targetObj.Value.position);
             _navAgent.isStopped = false;
             _animator.SetBool("isWalking", true);
         }
@@ -30,7 +30,16 @@ public class MoveToPos : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (Util.isInRange(transform.position, _targetPos.Value, 1f))
+        if (_targetObj.Value == null)
+            return TaskStatus.Failure;
+
+        if (_navAgent.pathStatus == NavMeshPathStatus.PathComplete)
+        {
+            _navAgent.SetDestination(_targetObj.Value.position);
+            _navAgent.isStopped = false;
+        }
+
+        if (Util.isInRange(transform.position, _targetObj.Value.position, 1f))
         {
             _navAgent.isStopped = true;
             _animator.SetBool("isWalking", false);

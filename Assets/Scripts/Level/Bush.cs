@@ -7,8 +7,14 @@ using UnityEngine;
 public class Bush : MonoBehaviour
 {
 
+    public float _foodValue = 0.5f;
     public event Action<Bush> onDie;
 
+    private void Update()
+    {
+        if (_foodValue <= 0)
+            Destroy(gameObject);
+    }
 
     private void OnDestroy()
     {

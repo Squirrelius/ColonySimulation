@@ -48,7 +48,7 @@ public class Util
         for (int i = 0; i < collidersInRange.Length; i++)
         {
             Transform obj = collidersInRange[i].transform;
-            if (obj.tag.Equals(tag))
+            if (obj.tag.Equals(tag) && obj.transform != origin.transform)
                 objList.Add(obj);
         }
 

@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class IsObjectClose : Conditional
 {
-    public float _range;
+    public SharedFloat _range;
     public string _objectTag;
     public SharedTransform _closestObject;
     public override void OnAwake()
@@ -16,7 +16,7 @@ public class IsObjectClose : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        Transform closestObject = Util.FindClosestObj(transform, _range, _objectTag);
+        Transform closestObject = Util.FindClosestObj(transform, _range.Value, _objectTag);
         if (closestObject != null)
         {
             _closestObject.Value = closestObject;

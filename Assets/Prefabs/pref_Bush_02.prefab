@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6239969156481229051}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.6824, y: 2.6824, z: 2.6824}
+  m_LocalScale: {x: 1.7706255, y: 1.7706255, z: 1.7706255}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,7 +94,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.30420214
+  m_Radius: 0.2
   m_Center: {x: -0.003984183, y: 0.23171106, z: -0.005911961}
 --- !u!114 &7784635198549644954
 MonoBehaviour:
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startScale: 0.1
-  _growDuration: 5
+  _growDuration: 2
 --- !u!114 &4748145967607048833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63add4657c061da4d84c3313fd9df1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _foodValue: 0.5
 --- !u!208 &-5207463013251430796
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -132,7 +133,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.30400002, y: 0.24700001, z: 0.30400002}
+  m_Extents: {x: 0.2, y: 0.24700001, z: 0.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 0

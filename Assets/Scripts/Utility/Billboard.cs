@@ -10,16 +10,16 @@ public class Billboard : MonoBehaviour
 
     void Awake()
     {
+        originalRotation = transform.rotation;
         camTransform = FindObjectOfType<Camera>().transform;
     }
 
     void Start()
     {
-        originalRotation = transform.rotation;
     }
 
     void Update()
     {
-        transform.rotation = camTransform.rotation * originalRotation;
+        transform.rotation = camTransform.rotation;
     }
 }

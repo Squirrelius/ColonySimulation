@@ -10,15 +10,16 @@ public class LevelManager : MonoBehaviour
     public GameObject _treePrefab;
     public LayerMask _blockingLayerMask;
 
-    public int _treesPerDay = 5;
-    public int _bushesPerDay = 7;
+    public int _treesPerMinute = 5;
+    public int _bushesPerMinute = 7;
 
     public int _maxTrees = 20;
-    public int _maxBushes = 30;
+    public int _maxBushes = 80;
 
     private List<Tree> _treeList;
     private List<Bush> _bushList;
 
+    private float _timer = 60;
 
     void Awake()
     {
@@ -29,9 +30,11 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        _timer += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space) || _timer >= 60)
         {
-            for (int i = 0; i < _treesPerDay; i++)
+            _timer = 0;
+            for (int i = 0; i < _treesPerMinute; i++)
             {
                 if (_treeList.Count < _maxTrees)
                 {
@@ -41,7 +44,7 @@ public class LevelManager : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < _bushesPerDay; i++)
+            for (int i = 0; i < _bushesPerMinute; i++)
             {
                 if (_bushList.Count < _maxBushes)
                 {
