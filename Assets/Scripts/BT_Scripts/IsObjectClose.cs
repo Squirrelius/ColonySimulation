@@ -5,23 +5,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[TaskCategory("Lumberjack")]
-public class IsTreeClose : Conditional
+public class IsObjectClose : Conditional
 {
     public float _range;
-    public SharedTransform _closestTree;
-
+    public string _objectTag;
+    public SharedTransform _closestObject;
     public override void OnAwake()
     {
-
     }
 
     public override TaskStatus OnUpdate()
     {
-        Tree closestTree = Util.FindClosestObj<Tree>(transform, _range);
-        if (closestTree != null)
+        Transform closestObject = Util.FindClosestObj(transform, _range, _objectTag);
+        if (closestObject != null)
         {
-            _closestTree.Value = closestTree.transform;
+            _closestObject.Value = closestObject;
             return TaskStatus.Success;
         }
         else

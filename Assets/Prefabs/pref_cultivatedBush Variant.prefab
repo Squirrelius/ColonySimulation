@@ -80,7 +80,12 @@ PrefabInstance:
     - target: {fileID: 6239969156481229051, guid: b71b0f8d2f881c743a85228f3030d1cb,
         type: 3}
       propertyPath: m_Name
-      value: cultivatedBush Variant
+      value: pref_cultivatedBush Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239969156481229051, guid: b71b0f8d2f881c743a85228f3030d1cb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bush
       objectReference: {fileID: 0}
     - target: {fileID: 7784635198549644954, guid: b71b0f8d2f881c743a85228f3030d1cb,
         type: 3}

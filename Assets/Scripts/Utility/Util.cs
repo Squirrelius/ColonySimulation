@@ -41,6 +41,35 @@ public class Util
             return objList[0];
     }
 
+    public static Transform FindClosestObj(Transform origin, float range, string tag)
+    {
+        Collider[] collidersInRange = Physics.OverlapSphere(origin.position, range);
+        List<Transform> objList = new List<Transform>();
+        for (int i = 0; i < collidersInRange.Length; i++)
+        {
+            Transform obj = collidersInRange[i].transform;
+            if (obj.tag.Equals(tag))
+                objList.Add(obj);
+        }
+
+        objList.Sort((a, b) =>
+        {
+            float distA = Vector3.SqrMagnitude(origin.position - a.transform.position);
+            float distB = Vector3.SqrMagnitude(origin.position - b.transform.position);
+            if (distA < distB)
+                return -1;
+            else if (distA == distB)
+                return 0;
+            else return 1;
+        }
+        );
+
+        if (objList.Count == 0)
+            return null;
+        else
+            return objList[0];
+    }
+
     public static void PrintMessageToScreen(string msg)
     {
         Text txt = GameObject.Find("ErrorMessageText").GetComponent<Text>();
