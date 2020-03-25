@@ -16,17 +16,17 @@ public class Chicken : MonoBehaviour
     private float _fullness;
     private float _timeSinceLastPregnancy = 0;
     private ParticleSystem _ps;
-    private bool _isBurningEnergy;
+    private bool _isBurningEnergy = true;
 
     void Awake()
     {
-        _Fullness = 0.25f;
+        _Fullness = 0.3f;
         _ps = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update()
     {
-        float energyBurnRate = _moveSpeed * 0.25f + _detectionRange * 0.05f;
+        float energyBurnRate = _moveSpeed * 0.1f + _detectionRange * 0.025f;
         _timeSinceLastPregnancy += Time.deltaTime;
         if(_IsBurningEnergy)
             _Fullness -= Time.deltaTime * energyBurnRate / 60;
@@ -89,7 +89,7 @@ public class Chicken : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(1,1,1,0.15f);
+        Gizmos.color = new Color(1,1,1,0.25f);
         Gizmos.DrawSphere(transform.position, _DetectionRange);
         Gizmos.color = new Color(1, 1, 1, 1);
     }

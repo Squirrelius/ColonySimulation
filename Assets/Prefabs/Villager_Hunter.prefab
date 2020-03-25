@@ -252,7 +252,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 1080
@@ -329,7 +329,7 @@ MonoBehaviour:
         Item From Storage","Instant":true,"ItemTypes_itemToRetrieve":"Meat"}]},{"Type":"EatMeat","NodeData":{"Offset":"(34.35501,156.689026)"},"ID":7,"Name":"Eat
         Meat","Instant":true}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.ConditionalEvaluator","NodeData":{"Offset":"(2.91015625,191.9693)"},"ID":8,"Name":"Conditional
         Evaluator","Instant":true,"SharedBoolreevaluate":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"ConditionalconditionalTask":{"Type":"IsCarryingItem","ItemTypes_itemToCompare":"Meat"},"Children":[{"Type":"DeliverItemToStorage","NodeData":{"Offset":"(2.910204,122.481995)"},"ID":9,"Name":"Deliver
-        Item To Storage","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(282.397339,203.507751)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"IsObjectClose","NodeData":{"Offset":"(-72.98724,113.76416)"},"ID":11,"Name":"Is
+        Item To Storage","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(282.397339,203.507751)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsObjectClose","NodeData":{"Offset":"(-72.98724,113.76416)"},"ID":11,"Name":"Is
         Object Close","Instant":true,"SharedFloat_range":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":999},"String_objectTag":"Chicken","SharedTransform_closestObject":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"closestChicken","IsShared":true}},{"Type":"HuntChicken","NodeData":{"Offset":"(77.0126343,113.76416)"},"ID":12,"Name":"Hunt
         Chicken","Instant":true,"SharedTransform_chickenTransform":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"closestChicken","IsShared":true}}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"closestChicken","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"fullness","IsShared":true,"PropertyMapping":"Villager/_Fullness","PropertyMappingOwner":1,"SinglemValue":0}]}'
       fieldSerializationData:

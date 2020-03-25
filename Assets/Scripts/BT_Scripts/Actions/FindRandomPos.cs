@@ -21,7 +21,6 @@ public class FindRandomPos : Action
         while(rndPosCounter < 50)
         {
             Vector2 rndPosAdditive = Random.insideUnitCircle * _radius.Value;
-
             float rndX = Mathf.Clamp(transform.position.x + rndPosAdditive.x, _minX.Value, _maxX.Value);
             float rndZ = Mathf.Clamp(transform.position.z + rndPosAdditive.y, _minZ.Value, _maxZ.Value);
 
