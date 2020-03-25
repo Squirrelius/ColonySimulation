@@ -9,14 +9,14 @@ using UnityEngine.AI;
 [TaskCategory("Villager")]
 public class DeliverItemToStorage : Action
 {
-    private Villager _lumberjack;
+    private Villager _villager;
     private Storage _storage;
     private NavMeshAgent _navAgent;
     private Animator _animator;
 
     public override void OnAwake()
     {
-        _lumberjack = GetComponent<Villager>();
+        _villager = GetComponent<Villager>();
         _navAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _storage = GameObject.FindObjectOfType<Storage>();
@@ -36,12 +36,12 @@ public class DeliverItemToStorage : Action
             _navAgent.isStopped = true;
             _animator.SetBool("isWalking", false);
 
-            if (_lumberjack._CarriedItem == ItemTypes.Wood)
+            if (_villager._CarriedItem == ItemTypes.Wood)
                 _storage._Wood++;
-            else if (_lumberjack._CarriedItem == ItemTypes.Meat)
+            else if (_villager._CarriedItem == ItemTypes.Meat)
                 _storage._Meat++;
 
-            _lumberjack._CarriedItem = ItemTypes.None;
+            _villager._CarriedItem = ItemTypes.None;
 
             return TaskStatus.Success;
         }

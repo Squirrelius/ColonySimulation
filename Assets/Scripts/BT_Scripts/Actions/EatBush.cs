@@ -31,18 +31,15 @@ public class EatBush : Action
     public override TaskStatus OnUpdate()
     {
         if (_bush == null)
+        {
+            _anim.SetBool("isEating", false);
             return TaskStatus.Failure;
+        }
 
         _anim.SetBool("isEating", true);
         _chicken._Fullness += Time.deltaTime / 5;
         _bush._foodValue -= Time.deltaTime / 5;
 
-        if (_bush == null)
-        {
-            _anim.SetBool("isEating", false);
-            return TaskStatus.Failure;
-        }
-        else
-            return TaskStatus.Running;
+        return TaskStatus.Running;
     }
 }

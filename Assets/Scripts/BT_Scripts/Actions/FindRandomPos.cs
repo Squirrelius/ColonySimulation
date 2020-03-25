@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class FindRandomPos : Action
 {
+    public SharedFloat _radius = 10;
+
     public SharedFloat _minX = -75;
     public SharedFloat _maxX = 75;
     public SharedFloat _minZ = -75;
@@ -18,8 +20,10 @@ public class FindRandomPos : Action
         int rndPosCounter = 0;
         while(rndPosCounter < 50)
         {
-            float rndX = Random.Range(_minX.Value, _maxX.Value);
-            float rndZ = Random.Range(_minZ.Value, _maxZ.Value);
+            Vector2 rndPosAdditive = Random.insideUnitCircle * _radius.Value;
+
+            float rndX = Mathf.Clamp(transform.position.x + rndPosAdditive.x, _minX.Value, _maxX.Value);
+            float rndZ = Mathf.Clamp(transform.position.z + rndPosAdditive.y, _minZ.Value, _maxZ.Value);
 
             Vector3 rndPos = new Vector3(rndX, 0, rndZ);
 

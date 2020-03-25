@@ -13,7 +13,7 @@ public class HuntChicken : Action
     private Villager _villager;
     private NavMeshAgent _navAgent;
     private Animator _animator;
-
+    private float _timeSlaughterStarted;
     public override void OnAwake()
     {
         _villager = GetComponent<Villager>();
@@ -26,6 +26,7 @@ public class HuntChicken : Action
         _navAgent.SetDestination(_chickenTransform.Value.position);
         _navAgent.isStopped = false;
         _animator.SetBool("isWalking", true);
+        _timeSlaughterStarted = float.MaxValue;
     }
 
     public override TaskStatus OnUpdate()
@@ -34,17 +35,37 @@ public class HuntChicken : Action
             return TaskStatus.Failure;
 
         _navAgent.SetDestination(_chickenTransform.Value.position);
-
-        if (Util.isInRange(transform.position, _chickenTransform.Value.position, 1f))
+        //If Chicken is caught -> Start Slaughtering it
+        if (Util.isInRange(transform.position, _chickenTransform.Value.position, 1f) && _timeSlaughterStarted == float.MaxValue)
         {
-            _navAgent.isStopped = true;
-            _animator.SetBool("isWalking", false);
+            _timeSlaughterStarted = Time.time;
 
+            _navAgent.isStopped = true;
+            _chickenTransform.Value.GetComponent<NavMeshAgent>().isStopped = true;//Stop the chicken
+            _chickenTransform.Value.GetComponent<BehaviorTree>().DisableBehavior();
+            _chickenTransform.Value.GetComponent<Chicken>()._IsBurningEnergy = false;
+            _animator.SetBool("isWalking", false);
+            _animator.SetBool("isChopping", true);
+        }
+        //finished slaughtering
+        else if (Time.time > _timeSlaughterStarted + 5)
+        {
+            _animator.SetBool("isChopping", false);
             _villager._CarriedItem = ItemTypes.Meat;
             GameObject.Destroy(_chickenTransform.Value.gameObject);
             return TaskStatus.Success;
         }
-        else
-            return TaskStatus.Running;
+        //currently slaughtering
+        else if(_timeSlaughterStarted != float.MaxValue)
+        {
+            transform.LookAt(_chickenTransform.Value);
+        }
+
+        return TaskStatus.Running;
+    }
+
+    void SlaughterChicken(Transform _chickenTransform)
+    {
+
     }
 }

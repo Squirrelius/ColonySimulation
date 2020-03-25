@@ -16,6 +16,7 @@ public class Chicken : MonoBehaviour
     private float _fullness;
     private float _timeSinceLastPregnancy = 0;
     private ParticleSystem _ps;
+    private bool _isBurningEnergy;
 
     void Awake()
     {
@@ -27,14 +28,15 @@ public class Chicken : MonoBehaviour
     {
         float energyBurnRate = _moveSpeed * 0.25f + _detectionRange * 0.05f;
         _timeSinceLastPregnancy += Time.deltaTime;
-        _Fullness -= Time.deltaTime * energyBurnRate / 60;
+        if(_IsBurningEnergy)
+            _Fullness -= Time.deltaTime * energyBurnRate / 60;
     }
 
     public void SpawnBabies()
     {
         _timeSinceLastPregnancy = 0;
         Instantiate(_chickenPrefab, transform.position, Quaternion.identity);
-        _Fullness -= 0.25f;
+        _Fullness -= 0.3f;
     }
 
     public void PlaySexyParticle(float duration)
@@ -65,6 +67,12 @@ public class Chicken : MonoBehaviour
             if (_fullness <= 0)
                 Die();
         }
+    }
+
+    public bool _IsBurningEnergy
+    {
+        get => _isBurningEnergy;
+        set => _isBurningEnergy = value;
     }
 
     public float _DetectionRange

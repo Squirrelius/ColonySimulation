@@ -38,12 +38,12 @@ public class RetrieveItemFromStorage : Action
             _navAgent.isStopped = true;
             _animator.SetBool("isWalking", false);
 
-            if (_storage._Wood > 0)
+            if (_itemToRetrieve== ItemTypes.Wood &&  _storage._Wood > 0)
             {
                 _storage._Wood--;
                 _villager._CarriedItem = ItemTypes.Wood;
             }
-            else if (_storage._Meat > 0)
+            else if (_itemToRetrieve == ItemTypes.Meat && _storage._Meat > 0)
             {
                 _storage._Meat--;
                 _villager._CarriedItem = ItemTypes.Meat;
