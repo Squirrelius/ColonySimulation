@@ -5607,7 +5607,7 @@ GameObject:
   - component: {fileID: 6475642707634117794}
   - component: {fileID: 382809414664373829}
   m_Layer: 0
-  m_Name: Chicken
+  m_Name: pref_Chicken
   m_TagString: Chicken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5710,7 +5710,7 @@ MonoBehaviour:
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 0}
   mBehaviorSource:
-    behaviorName: Chicken
+    behaviorName: ChickenBehav
     behaviorDescription: 
     mTaskData:
       types:

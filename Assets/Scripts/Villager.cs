@@ -10,7 +10,7 @@ public enum ItemTypes
     Meat
 }
 
-public class LumberJack : MonoBehaviour
+public class Villager : MonoBehaviour
 {
     public Slider _fullnessSlider;
     public Image _carriedItemIcon;
@@ -31,6 +31,15 @@ public class LumberJack : MonoBehaviour
         _Fullness -= Time.deltaTime * _energyBurnRate / 60;
     }
 
+    public void EatMeat()
+    {
+        if(_CarriedItem == ItemTypes.Meat)
+        {
+            _CarriedItem = ItemTypes.None;
+            _Fullness += 1f;
+        }
+    }
+
     public void Die()
     {
         Destroy(gameObject);
@@ -42,8 +51,8 @@ public class LumberJack : MonoBehaviour
         get => _fullness;
         set
         {
-            _fullness = value;
-            _fullnessSlider.value = value;
+            _fullness = Mathf.Clamp(value, 0, 1);
+            _fullnessSlider.value = _fullness;
             if (_fullness <= 0)
                 Die();
         }

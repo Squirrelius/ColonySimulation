@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[TaskCategory("Lumberjack")]
+[TaskCategory("Villager")]
 public class IsCarryingItem : Conditional
 {
     public ItemTypes _itemToCompare;
@@ -13,7 +13,7 @@ public class IsCarryingItem : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        ItemTypes carriedItem = GetComponent<LumberJack>()._CarriedItem;
+        ItemTypes carriedItem = GetComponent<Villager>()._CarriedItem;
         if (carriedItem == _itemToCompare)
             return TaskStatus.Success;
         else

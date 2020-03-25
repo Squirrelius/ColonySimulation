@@ -6,17 +6,19 @@ using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine.AI;
 
 
-[TaskCategory("Lumberjack")]
-public class DeliverItemToStorage : Action
+[TaskCategory("Villager")]
+public class RetrieveItemFromStorage : Action
 {
-    private LumberJack _lumberjack;
+    public ItemTypes _itemToRetrieve;
+
+    private Villager _villager;
     private Storage _storage;
     private NavMeshAgent _navAgent;
     private Animator _animator;
 
     public override void OnAwake()
     {
-        _lumberjack = GetComponent<LumberJack>();
+        _villager = GetComponent<Villager>();
         _navAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _storage = GameObject.FindObjectOfType<Storage>();
@@ -36,12 +38,18 @@ public class DeliverItemToStorage : Action
             _navAgent.isStopped = true;
             _animator.SetBool("isWalking", false);
 
-            if (_lumberjack._CarriedItem == ItemTypes.Wood)
-                _storage._Wood++;
-            else if (_lumberjack._CarriedItem == ItemTypes.Meat)
-                _storage._Meat++;
-
-            _lumberjack._CarriedItem = ItemTypes.None;
+            if (_storage._Wood > 0)
+            {
+                _storage._Wood--;
+                _villager._CarriedItem = ItemTypes.Wood;
+            }
+            else if (_storage._Meat > 0)
+            {
+                _storage._Meat--;
+                _villager._CarriedItem = ItemTypes.Meat;
+            }
+            else
+                return TaskStatus.Failure;
 
             return TaskStatus.Success;
         }

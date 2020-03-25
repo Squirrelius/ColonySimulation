@@ -5,18 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[TaskCategory("Lumberjack")]
+[TaskCategory("Villager")]
 public class ChopTree : Action
 {
     public float _chopDuration = 5;
     public SharedTransform _treeToChop;
 
     private Animator _animator;
-    private LumberJack _lumberJack;
+    private Villager _lumberJack;
     private float _timeStartedChopping;
     public override void OnAwake()
     {
-        _lumberJack = GetComponent<LumberJack>();
+        _lumberJack = GetComponent<Villager>();
         _animator = GetComponent<Animator>();
     }
 
