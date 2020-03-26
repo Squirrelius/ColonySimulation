@@ -18,21 +18,27 @@ public class ChickenMating : Action
 
     public override void OnStart()
     {
+        _chicken._IsBurningEnergy = false;
         _chicken.PlaySexyParticle(3);
         _timeToSpawnBabies = Time.time + 3;
     }
 
     public override TaskStatus OnUpdate()
     {
+        if (_chicken._Fullness < 0.5f || _otherChicken.Value == null)
+        {
+            _chicken._IsBurningEnergy = true;
+            return TaskStatus.Failure;
+        }
+
         _chicken.transform.LookAt(_otherChicken.Value);
         if (Time.time > _timeToSpawnBabies)
         {
-            _chicken.SpawnBabies();
+            _chicken._IsBurningEnergy = true;
+            _chicken.SpawnBabies(_otherChicken.Value.GetComponent<Chicken>());
             return TaskStatus.Success;
         }
 
-        if (_chicken._Fullness < 0.5f)
-            return TaskStatus.Failure;
         else
             return TaskStatus.Running;
     }

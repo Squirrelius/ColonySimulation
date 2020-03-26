@@ -2,40 +2,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Chicken : MonoBehaviour
 {
-    public float _moveSpeed = 1;//causes .5 Energyburnrate per speedpoint
-    public float _detectionRange = 10;//causes 0.1 Energyburnrate per meter
+    private float _moveSpeed = 3.5f;
+    public float _detectionRange = 10;
+    public float _baseEnergyBurn = 0.25f;
+    public float _energyPerSpeed = 0.1f;//How much more energy is burned per _moveSpeed
+    public float _energyPerRange = 0.025f;//How much energy is burned per _detectionRange
     public Slider _fullnessSlider;
     public GameObject _chickenPrefab;
 
     public event Action onDeath;
 
-    private float _fullness;
+    [SerializeField] private float _fullness;
     private float _timeSinceLastPregnancy = 0;
     private ParticleSystem _ps;
     private bool _isBurningEnergy = true;
 
     void Awake()
     {
-        _Fullness = 0.3f;
         _ps = GetComponentInChildren<ParticleSystem>();
+        GetComponent<NavMeshAgent>().speed = _MoveSpeed;
     }
 
     void Update()
     {
-        float energyBurnRate = _moveSpeed * 0.1f + _detectionRange * 0.025f;
+        float energyBurnRate = _MoveSpeed * _energyPerSpeed + _detectionRange * _energyPerRange;
         _timeSinceLastPregnancy += Time.deltaTime;
-        if(_IsBurningEnergy)
-            _Fullness -= Time.deltaTime * energyBurnRate / 60;
+        if (_IsBurningEnergy)
+            _Fullness -= Time.deltaTime * (_baseEnergyBurn + energyBurnRate) / 60;
     }
 
-    public void SpawnBabies()
+    public void SpawnBabies(Chicken lovePartner)
     {
         _timeSinceLastPregnancy = 0;
-        Instantiate(_chickenPrefab, transform.position, Quaternion.identity);
+        Chicken newChick = Instantiate(_chickenPrefab, transform.position, Quaternion.identity).GetComponent<Chicken>();
+        newChick._Fullness = 0.3f;
+        //Inherit Stats from Parent and mutate them a bit
+        newChick._DetectionRange = _DetectionRange + UnityEngine.Random.Range(-2f, 2f);
+        newChick._MoveSpeed = lovePartner._MoveSpeed + UnityEngine.Random.Range(-0.3f, 0.3f);
         _Fullness -= 0.3f;
     }
 
@@ -52,7 +60,7 @@ public class Chicken : MonoBehaviour
 
     public void Die()
     {
-        if(onDeath != null)
+        if (onDeath != null)
             onDeath();
         Destroy(gameObject);
     }
@@ -86,10 +94,18 @@ public class Chicken : MonoBehaviour
         get => _timeSinceLastPregnancy;
         set => _timeSinceLastPregnancy = value;
     }
-
+    public float _MoveSpeed
+    {
+        get => _moveSpeed;
+        set
+        {
+            _moveSpeed = value;
+            GetComponent<NavMeshAgent>().speed = _moveSpeed;
+        }
+    }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(1,1,1,0.25f);
+        Gizmos.color = new Color(1, 1, 1, 0.25f);
         Gizmos.DrawSphere(transform.position, _DetectionRange);
         Gizmos.color = new Color(1, 1, 1, 1);
     }
