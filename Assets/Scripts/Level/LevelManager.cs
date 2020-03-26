@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour
 
         for (int i = 0; i < 20; i++)
         {
-            Vector3 rndPos = new Vector3(Random.Range(-_levelSize.x, _levelSize.x) / 2f, 0, Random.Range(-_levelSize.y, _levelSize.y) / 2f);
+            Vector3 rndPos = new Vector3(Random.Range(-_levelSize.x+1, _levelSize.x-1) / 2f, 0, Random.Range(-_levelSize.y+1, _levelSize.y-1) / 2f);
             Collider[] colliders = Physics.OverlapSphere(rndPos + coll.bounds.center, radius, _blockingLayerMask);
             if (colliders.Length == 0)
             {

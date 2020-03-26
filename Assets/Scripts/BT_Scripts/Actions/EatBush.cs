@@ -37,8 +37,9 @@ public class EatBush : Action
         }
 
         _anim.SetBool("isEating", true);
-        _chicken._Fullness += Time.deltaTime / 5;
-        _bush._foodValue -= Time.deltaTime / 5;
+        float amtEaten = Mathf.Clamp(Time.deltaTime / 5, 0, _bush._foodValue);
+        _chicken._Fullness += amtEaten;
+        _bush._foodValue -= amtEaten;
 
         return TaskStatus.Running;
     }

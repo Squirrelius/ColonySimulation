@@ -40,10 +40,10 @@ public class Chicken : MonoBehaviour
     {
         _timeSinceLastPregnancy = 0;
         Chicken newChick = Instantiate(_chickenPrefab, transform.position, Quaternion.identity).GetComponent<Chicken>();
-        newChick._Fullness = 0.3f;
+        newChick._Fullness = 0.25f;
         //Inherit Stats from Parent and mutate them a bit
         newChick._DetectionRange = _DetectionRange + UnityEngine.Random.Range(-2f, 2f);
-        newChick._MoveSpeed = lovePartner._MoveSpeed + UnityEngine.Random.Range(-0.3f, 0.3f);
+        newChick._MoveSpeed = _MoveSpeed + UnityEngine.Random.Range(-0.3f, 0.3f);
         _Fullness -= 0.3f;
     }
 

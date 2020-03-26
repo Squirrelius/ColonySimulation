@@ -19,7 +19,7 @@ public class Villager : MonoBehaviour
     private ItemTypes _carriedItem;
 
     [SerializeField] private float _energyBurnRate = 0.5f;//Determines how many % fullness is lost per minute
-    private float _fullness;
+    [SerializeField] private float _fullness;
 
     private void Awake()
     {
